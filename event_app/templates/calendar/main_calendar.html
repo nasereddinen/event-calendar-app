@@ -1,0 +1,232 @@
+
+{% extends 'layouts/base.html' %}
+{% load static %}
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+
+{% endblock %}
+
+{% block content %}
+    <!-- Begin page -->
+
+    <div id="layout-wrapper">
+        <!-- navbar goes here  -->
+        {% include "includes/navbar.html" %}
+
+        
+
+<!-- removeNotificationModal -->
+<div id="removeNotificationModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="NotificationModalbtn-close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2 text-center">
+                    <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                        <h4>Are you sure ?</h4>
+                        <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn w-sm btn-danger" id="delete-notification">Yes, Delete It!</button>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+        <!-- ========== App Menu ========== -->
+        {% include 'includes/sidebar.html' %}
+        <!-- Left Sidebar End -->
+        <!-- Vertical Overlay-->
+        <div class="vertical-overlay"></div>
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Calendar</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>
+                                        <li class="breadcrumb-item active">Calendar</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-xl-3">
+                                    <div class="card card-h-100">
+                                        <div class="card-body">
+                                            <button class="btn btn-primary w-100" id="btn-new-event" data-bs-toggle="modal" data-bs-target="#event-modal"><i class="mdi mdi-plus"></i> Create New Event</button>
+
+                                            <div id="external-events">
+                                                <br>
+                                                <p class="text-muted">The Colors event</p>
+                                                
+                                                {% for color in list_color %}
+                                                <div class="external-event fc-event text-white mt-1" style="background-color:{{color.color}}" data-class="bg-soft-success">
+                                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>New Event
+                                                    {{color.title}}
+                                                </div>
+                                                
+                                                {% endfor %}
+                                            </div>
+                                            <br>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="mb-1">Upcoming Events</h5>
+                                        <p class="text-muted">Don't miss scheduled events</p>
+                                        
+                                        <div class="pe-2 me-n1 mb-3" data-simplebar style="height: 400px">
+                                            {% for event in list_events %}
+                                            <div class="card mb-3">
+                                                 <div class="card-body"> 
+                                                    <div class="d-flex mb-3"> 
+                                                        <div class="flex-grow-1">
+                                                            <i class="mdi mdi-checkbox-blank-circle me-2 text-info"></i>
+                                                            <span class="fw-medium">{{event.start_date}} </span></div>          
+                                                         <div class="flex-shrink-0">
+                                                            <small class="badge badge-soft-primary ms-auto">{{event.start_time}}to {{event.end_time}}</small>
+                                                        </div> 
+                                                     </div>    
+                                                      <h6 class="card-title fs-16"> {{event.location}}</h6> 
+                                                      <p class="text-muted text-truncate-two-lines mb-0"> </p>  
+                                                    </div>            
+                                                        </div>
+                                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card">
+                                        <div class="card-body bg-soft-info">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0">
+                                                    <i data-feather="calendar" class="text-info icon-dual-info"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="fs-16">Welcome to your Calendar!</h6>
+                                                    <p class="text-muted mb-0">Event that applications book will appear here. Click on an event to see the details and manage applicants event.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end card-->
+                                </div> <!-- end col-->
+
+                                <div class="col-xl-9">
+                                    <div class="card card-h-100">
+                                        <div class="card-body">
+                                            <div id='calendar'></div>
+                                        </div>
+                                    </div>
+                                </div><!-- end col -->
+                            </div>
+                            <!--end row-->
+
+                            <div style='clear:both'></div>
+
+                            <!-- Add New Event MODAL -->
+                            <div class="modal fade" id="event-modal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0">
+                                        <div class="modal-header p-3 bg-soft-info">
+                                            <h5 class="modal-title" id="modal-title">Event</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                        </div>
+                                        <div class="modal-body p-4">
+                                            <!--  the calendar form   -->
+                                            {% include './calendar_form.html' %}
+                                        </div>
+                                    </div> <!-- end modal-content-->
+                                </div> <!-- end modal dialog-->
+                            </div> <!-- end modal-->
+                            <!-- end modal-->
+
+                            <div class="modal fade" id="event-update-modal" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0">
+                                        <div class="modal-header p-3 bg-soft-info">
+                                            <h5 class="modal-title" id="modal-title">Event update</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                        </div>
+                                        <div class="modal-body p-4">
+                                            <!--  the calendar form   -->
+                                            {% include './calendar_update_form.html' %}
+                                        </div>
+                                    </div> <!-- end modal-content-->
+                                </div> <!-- end modal dialog-->
+                            </div> 
+
+                        </div>
+                    </div> <!-- end row-->
+
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6">
+                           
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!--start back-to-top-->
+    
+    <!--preloader-->
+    
+
+  
+
+    <!-- Theme Settings -->
+   
+    </div>
+{% endblock %}
+    <!-- JAVASCRIPT -->
+{% block javascript %}
+<script>
+$('.external-event').draggable({
+    revert: true,    
+    revertDuration: 0  //
+  });
+
+  $('.external-event').data('duration', '03:00');
+</script>
+<script src="{% static 'assets/js/calendar_core.js' %}" ></script>
+
+{% endblock %}
+    

@@ -1,0 +1,98 @@
+<form method="POST" id="update-event">
+    {% csrf_token %}
+    
+    
+
+       
+    <div class="row event-form">
+        <div class="col-12">
+            <div class="mb-3">
+                <label class="form-label">Type</label>
+                <select class="form-select" name="category" id="event-category" required>
+                    {% for color in list_color %}
+                    <option style="background-color:{{color.color}}" value="{{color.id}}">{{color.title}}</option>
+                    {% endfor %}
+                    
+                </select>
+                <div class="invalid-feedback">Please select a valid event category</div>
+            </div>
+        </div>
+        <!--end col start date-->
+        <div class="col-12">
+            <div class="mb-3">
+                <label class="form-label">Event Name</label>
+                <input class="form-control" placeholder="Enter event name" type="text" name="title" id="event-title" required value="" />
+                <div class="invalid-feedback">Please provide a valid event name</div>
+            </div>
+        </div>
+        <!--end col start date-->
+        <div class="col-12">
+            <div class="mb-3">
+                <label>Event Start Date</label>
+                <div class="input-group">
+                    <input name="start-date" type="date" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" required>
+                    <span class="input-group-text"><i class="ri-calendar-event-line"></i></span> 
+
+                </div>
+            </div>
+        </div>
+        <!--end col-->
+
+        <!-- col end date -->
+
+        <div class="col-12">
+            <div class="mb-3">
+                <label>Event End Date</label>
+                <div class="input-group">
+                    <input name="end-date" type="date" id="event-end-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" required>
+                    <span class="input-group-text"></span> 
+                </div>
+            </div>
+        </div>
+
+        <!-- en col end date-->
+        <div class="col-12" id="event-time">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label class="form-label">Start Time</label>
+                        <div class="input-group ">
+                            <input name="start-time" id="start-time" type="time" class="form-control flatpickr flatpickr-input" placeholder="Select start time" >
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label class="form-label">End Time</label>
+                        <div class="input-group">
+                            <input name="end-time" id="end-time" type="time" class="form-control flatpickr flatpickr-input" placeholder="Select end time" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end col-->
+        <div class="col-12">
+            <div class="mb-3">
+                <label for="event-location">Location</label>
+                <div>
+                    <input type="text" class="form-control" name="event-location" id="event-location" placeholder="Event location">
+                </div>
+            </div>
+        </div>
+        <!--end col-->
+        <div class="col-12">
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description-updated" class="form-control" id="up-description" placeholder="Enter a description" rows="3"></textarea>
+            </div>
+        </div>
+        <!--end col-->
+    </div>
+    <!--end row-->
+    <div class="hstack gap-2 justify-content-end">
+        <button type="button" class="btn btn-soft-danger" id="btn-delete-event"><i class="ri-close-line align-bottom"></i> Delete</button>
+        <button type="submit" class="btn btn-success" id="btn-save-event">Add Event</button>
+    </div>
+</form>
