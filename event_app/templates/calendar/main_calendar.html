@@ -4,6 +4,12 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 
+<style>
+   .fc-icon-left-single-arrow, .fc-icon-right-single-arrow {
+        color:white;
+       }
+
+</style>
 
 {% endblock %}
 
@@ -179,6 +185,72 @@
                                     </div> <!-- end modal-content-->
                                 </div> <!-- end modal dialog-->
                             </div> 
+                            
+                            <!-- the details modal -->
+                            
+                            <div class="modal fade" id="ej-dtails-modal" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0">
+                                        <div class="modal-header p-3 bg-soft-info">
+                                            <h5 class="modal-title" id="js-detail-modal-title"> s</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                        </div>
+                                        <div class="modal-body p-4">
+                                            
+                                                <div class="text-end">
+                                                    <button class="btn btn-sm btn-soft-primary" id="edit-event-ml" role="button">Edit</button>
+                                                </div>
+                                                <div class="event-details">
+                                                    <div class="d-flex mb-2">
+                                                        <div class="flex-grow-1 d-flex align-items-center">
+                                                            <div class="flex-shrink-0 me-3">
+                                                                <i class="ri-calendar-event-line text-muted fs-16"></i>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                <h6 class="d-block fw-semibold mb-0" id="js-event-start-date-tag">13 February,2023</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <div class="flex-shrink-0 me-3">
+                                                            <i class="ri-time-line text-muted fs-16"></i>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <h6 class="d-block fw-semibold mb-0"><span id="js-event-starttime-tag">12:00 AM</span> - <span id="js-event-endtime-tag">1:00 AM</span></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <div class="flex-shrink-0 me-3">
+                                                            <i class="ri-map-pin-line text-muted fs-16"></i>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <h6 class="d-block fw-semibold mb-0"> <span id="js-event-location-tag">Head Office, US</span></h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex mb-3">
+                                                        <div class="flex-shrink-0 me-3">
+                                                            <i class="ri-discuss-line text-muted fs-16"></i>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <p class="d-block text-muted mb-0" id="js-event-description-tag">Tell how to boost website traffic</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                             
+                                                <!--end row-->
+                                                <div class="hstack gap-2 justify-content-end">
+                                                    <button type="button" class="btn btn-soft-danger" id="dtl-delete-event"><i class="ri-close-line align-bottom"></i> Delete</button>
+                                                </div>
+                                            
+                                        </div>
+                                    </div> <!-- end modal-content-->
+                                </div> <!-- end modal dialog-->
+                            </div>
+
+                            <!--end details-->
+
+
+
 
                         </div>
                     </div> <!-- end row-->
@@ -219,6 +291,23 @@
     <!-- JAVASCRIPT -->
 {% block javascript %}
 <script>
+    
+    $(document).ready(function(){
+        var multipleSelectButton = new Choices('#multipleselectuserfl', {
+        removeItemButton: true,
+        maxItemCount:15,
+        
+        
+        
+        });
+
+
+        
+        });
+
+
+       
+   
 $('.external-event').draggable({
     revert: true,    
     revertDuration: 0  //

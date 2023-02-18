@@ -10,7 +10,6 @@ urlpatterns=[
     path('update_event/<int:pk>/',views.update_event,name='update_event'),
     path('updatedrop/',views.event_drop,name='drop_event'),
     path('updatedrag/',views.event_drag,name='drag_event'),
-    path('color_event/',views.add_color,name='color_event'),
     path('logout',views.logout_view,name='logout'),
 
     

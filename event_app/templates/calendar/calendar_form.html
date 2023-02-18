@@ -7,9 +7,10 @@
         <div class="col-12">
             <div class="mb-3">
                 <label class="form-label">Type</label>
-                <select class="form-select" name="category" id="event-category" required>
+                <select class="form-select" name="eventcategory" id="event-category" required>
+                   
                     {% for color in list_color %}
-                    <option style="background-color:{{color.color}}" value="{{color.id}}">{{color.title}}</option>
+                    <option value="{{color.id}}">{{color.title}}</option>
                     {% endfor %}
                     
                 </select>
@@ -20,7 +21,7 @@
         <div class="col-12">
             <div class="mb-3">
                 <label class="form-label">Event Name</label>
-                <input class="form-control" placeholder="Enter event name" type="text" name="title" id="event-title" required value="" />
+                <input class="form-control" placeholder="Enter event name" type="text" name="eventtitle" id="event-title" required value="" />
                 <div class="invalid-feedback">Please provide a valid event name</div>
             </div>
         </div>
@@ -29,7 +30,7 @@
             <div class="mb-3">
                 <label>Event Start Date</label>
                 <div class="input-group">
-                    <input name="start-date" type="date" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" required>
+                    <input name="eventstart-date" type="date" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" required>
                     <span class="input-group-text"><i class="ri-calendar-event-line"></i></span> 
 
                 </div>
@@ -43,7 +44,7 @@
             <div class="mb-3">
                 <label>Event End Date</label>
                 <div class="input-group">
-                    <input name="end-date" type="date" id="event-end-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" required>
+                    <input name="eventend-date" type="date" id="event-end-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" required>
                     <span class="input-group-text"><i class="ri-calendar-event-line"></i></span> 
                 </div>
             </div>
@@ -56,7 +57,7 @@
                     <div class="mb-3">
                         <label class="form-label">Start Time</label>
                         <div class="input-group ">
-                            <input name="start-time" id="start-time" type="time" class="form-control flatpickr flatpickr-input" placeholder="Select start time" >
+                            <input name="eventstart-time" id="start-time" type="time" class="form-control flatpickr flatpickr-input" placeholder="Select start time" >
                             <span class="input-group-text"><i class="ri-time-line"></i></span>
                         </div>
                     </div>
@@ -65,7 +66,7 @@
                     <div class="mb-3">
                         <label class="form-label">End Time</label>
                         <div class="input-group">
-                            <input name="end-time" id="end-time" type="time" class="form-control flatpickr flatpickr-input" placeholder="Select end time" >
+                            <input name="eventend-time" id="end-time" type="time" class="form-control flatpickr flatpickr-input" placeholder="Select end time" >
                             <span class="input-group-text"><i class="ri-time-line"></i></span>
                         </div>
                     </div>
@@ -81,11 +82,23 @@
                 </div>
             </div>
         </div>
+        <!-- start the users col -->
+       
+        <div class="col-12">
+            <label for="event-followers">Followed users</label>
+            <div>
+            <select data-placeholder="select user" name="followed_user" class="form-select" id="multipleselectuserfl" multiple>
+                {% for user in list_users %}
+                <option value="{{user.id}}">{{user.username}}</option>
+                {% endfor %}
+              </select>
+            </div>
+        </div>
         <!--end col-->
         <div class="col-12">
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea name="description" class="form-control" id="event-description" placeholder="Enter a description" rows="3" spellcheck="false"></textarea>
+                <textarea name="eventdescription" class="form-control" id="event-description" placeholder="Enter a description" rows="3" spellcheck="false"></textarea>
             </div>
         </div>
         <!--end col-->
